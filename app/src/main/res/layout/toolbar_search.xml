@@ -31,6 +31,7 @@
         android:layout_alignTop="@id/etSearch"
         android:layout_alignBottom="@id/etSearch"
         android:layout_marginEnd="@dimen/margin_large"
+        android:indeterminateTint="@color/blue_700"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/etSearch"
         app:layout_constraintEnd_toEndOf="@+id/etSearch"

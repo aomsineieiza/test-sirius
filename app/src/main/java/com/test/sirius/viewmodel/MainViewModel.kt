@@ -49,6 +49,7 @@ class MainViewModel(
                     false
                 }
             } as MutableList<CityDataModel>
+            searchResult.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name ?: "" })
             searchResult.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.country ?: "" })
 
             searchCitiesListResponseModel.postValue(searchResult)

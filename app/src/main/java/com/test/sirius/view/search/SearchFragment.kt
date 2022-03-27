@@ -97,7 +97,7 @@ class SearchFragment : BaseFragment() {
                             }
                             viewModel.searchCitiesList(s.toString())
                         }
-                    }, 1000)
+                    }, 800)
                 }
             })
 

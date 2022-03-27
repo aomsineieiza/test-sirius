@@ -12,7 +12,7 @@ import com.test.sirius.base.BaseFragment
 import com.test.sirius.databinding.FragmentSearchBinding
 import com.test.sirius.model.CityDataModel
 import com.test.sirius.view.search.adapter.SearchResultsAdapter
-import com.test.sirius.viewmodel.SearchViewModel
+import com.test.sirius.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
@@ -20,7 +20,7 @@ class SearchFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchBinding
     private val cityList: MutableList<CityDataModel> = mutableListOf()
     private lateinit var searchResultsAdapter: SearchResultsAdapter
-    private val viewModel: SearchViewModel by sharedViewModel()
+    private val viewModel: MainViewModel by sharedViewModel()
     private var timer: Timer? = null
 
     override fun onCreateView(
@@ -29,13 +29,13 @@ class SearchFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-        viewModel.searchCity("")
+        viewModel.getCitiesList()
         return binding.root
     }
 
     override fun setObserver() {
         with(binding) {
-            viewModel.searchListResponseModel.observe(viewLifecycleOwner) { result ->
+            viewModel.getCitiesListResponseModel.observe(viewLifecycleOwner) { result ->
                 result.let { data ->
                     clearCityList()
                     cityList.addAll(data)
@@ -43,7 +43,15 @@ class SearchFragment : BaseFragment() {
                     rvSearchResults.visibility = View.VISIBLE
                 }
             }
-            viewModel.loadingSearchCouponDialogLiveData.observe(viewLifecycleOwner) { isShow ->
+            viewModel.searchCitiesListResponseModel.observe(viewLifecycleOwner) { result ->
+                result.let { data ->
+                    clearCityList()
+                    cityList.addAll(data)
+                    rvSearchResults.adapter?.notifyItemRangeChanged(0, cityList.size)
+                    rvSearchResults.visibility = View.VISIBLE
+                }
+            }
+            viewModel.loadingSearchCityDialogLiveData.observe(viewLifecycleOwner) { isShow ->
                 if (isShow) {
                     binding.toolbar.progressBarSearchCity.visibility = View.VISIBLE
                 } else {
@@ -87,7 +95,7 @@ class SearchFragment : BaseFragment() {
                                     clearCityList()
                                 }
                             }
-                            viewModel.searchCity(s.toString())
+                            viewModel.searchCitiesList(s.toString())
                         }
                     }, 1000)
                 }

@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface Service {
     @GET("/SiriusAndroid/android-assignment/master/cities.json")
-    suspend fun getCityList(): Response<MutableList<CityDataModel>>
+    suspend fun getCitiesList(): Response<MutableList<CityDataModel>>
 }

@@ -1,6 +1,9 @@
 package com.test.sirius.view.search.adapter
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -67,14 +70,19 @@ class SearchResultsAdapter(private val data: MutableList<CityDataModel>) :
             with(binding as ItemSearchCityBinding) {
                 tvName.text = "${item.name}, ${item.country}"
                 tvPosition.text = "${item.coord?.lat}, ${item.coord?.lon}"
-//                tvSearchResult.text = item.keyword
                 cvCity.setOnClickListener {
                     onItemClick?.invoke(item)
                 }
             }
         }
 
-        fun bindViewNotFoundData() {}
+        fun bindViewNotFoundData() {
+            with(binding as ItemSearchNotFoundResultBinding) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    tvSearchResult.visibility = View.VISIBLE
+                }, 4000)
+            }
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

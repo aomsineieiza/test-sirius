@@ -1,17 +1,17 @@
 package com.test.sirius.di
 
-import com.test.sirius.repository.SearchRepositoryImplement
+import com.test.sirius.repository.MainRepositoryImplement
 import com.test.sirius.service.NetworkManager
 import com.test.sirius.service.Service
-import com.test.sirius.usecase.SearchCityUseCase
-import com.test.sirius.viewmodel.SearchViewModel
+import com.test.sirius.usecase.GetCitiesListUseCase
+import com.test.sirius.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val repositoryModule = module {
     single {
         val network: NetworkManager = get()
-        SearchRepositoryImplement(network.createService(Service::class.java))
+        MainRepositoryImplement(network.createService(Service::class.java))
     }
 }
 
@@ -20,12 +20,12 @@ val serviceModule = module {
 }
 
 val useCaseModule = module {
-    factory { SearchCityUseCase(get()) }
+    factory { GetCitiesListUseCase(get()) }
 }
 
 val viewModelModule = module {
     viewModel {
-        SearchViewModel(
+        MainViewModel(
             get()
         )
     }

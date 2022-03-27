@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Text Styles  -->
+    <style name="TextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextStyle.Heading" parent="TextStyle">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+    </style>
+
+    <style name="TextStyle.Heading.Bold" parent="TextStyle">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

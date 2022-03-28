@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import com.test.sirius.R
+import com.test.sirius.utils.AppConstants
 
 abstract class BaseActivity : AppCompatActivity() {
     abstract fun setupView()
@@ -25,6 +26,21 @@ abstract class BaseActivity : AppCompatActivity() {
             replace(viewId, fragment, tag)
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             addToBackStack(tag)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount != 0) {
+            val currentFragment =
+                supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+
+            currentFragment.let {
+                when (it.name) {
+                    AppConstants.FRAGMENT_SEARCH -> {
+                        //Block pop stack first page
+                    }
+                }
+            }
         }
     }
 }
